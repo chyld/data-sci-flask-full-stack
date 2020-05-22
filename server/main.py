@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request, jsonify
+import pickle
 import numpy as np
 
 app = Flask(__name__)
-
+model = pickle.load(open("../models/model.p", "rb"))
 
 # 1 - basic GET
 @app.route('/hello', methods=['GET'])
@@ -33,3 +34,13 @@ def product_post():
     nums = np.array(nums)
     prod = nums.prod()
     return render_template('product.html', prod=prod)
+
+# 7 - master with links
+@app.route('/', methods=['GET'])
+def home():
+    return render_template('home.html')
+
+# 8 - model diagnostics
+@app.route('/diagnostics', methods=['GET'])
+def diagnostics():
+    return render_template('diagnostics.html', model=model)
