@@ -4,6 +4,7 @@ import numpy as np
 
 app = Flask(__name__)
 model = pickle.load(open("../models/model.p", "rb"))
+cv = pickle.load(open("../models/cv.p", "rb"))
 
 # 1 - basic GET
 @app.route('/hello', methods=['GET'])
@@ -44,3 +45,15 @@ def home():
 @app.route('/diagnostics', methods=['GET'])
 def diagnostics():
     return render_template('diagnostics.html', model=model)
+
+# 9 - predict sentiment
+@app.route('/sentiment', methods=['GET', 'POST'])
+def sentiment():
+    if request.method == 'POST':
+        review = request.form['review']
+        vector = cv.transform([review])
+        prediction = model.predict_proba(vector)
+        c0, c1 = prediction[0]
+        return render_template('sentiment.html', c0=c0, c1=c1)
+    else:
+        return render_template('sentiment.html')

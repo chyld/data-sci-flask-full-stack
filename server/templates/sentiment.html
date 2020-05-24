@@ -11,17 +11,20 @@
     <title>Hello, world!</title>
   </head>
   <body>
-    <h1>Home Sweet Home</h1>
+    <h1>Sentiment Analysis</h1>
 
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/hello">Hello</a></li>
-        <li><a href="/add/3/4">Add 3 + 4</a></li>
-        <li><a href="/fun">Fun</a></li>
-        <li><a href="/product">Product</a></li>
-        <li><a href="/diagnostics">Diagnostics</a></li>
-        <li><a href="/sentiment">Sentiment</a></li>
-    </ul>
+    <form action="/sentiment" method="POST">
+        <div class="form-group">
+          <label for="review">Game Review</label>
+          <input type="text" class="form-control" id="review" name="review">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <div>
+        <!-- add cool bad/good image for flair -->
+        {{c0}} and {{c1}}
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
